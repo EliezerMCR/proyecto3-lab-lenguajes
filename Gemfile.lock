@@ -1,0 +1,57 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    after_do (0.4.0)
+    furoshiki (0.6.1)
+      plist
+      rubyzip (>= 1.0.0)
+      warbler (~> 2.0.4)
+    jruby-jars (10.0.2.0)
+    jruby-rack (1.2.6)
+    nokogiri (1.18.10-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.10-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.10-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.10-arm-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.10-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.10-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.10-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.10-x86_64-linux-musl)
+      racc (~> 1.4)
+    plist (3.7.2)
+    racc (1.8.1)
+    rake (13.3.1)
+    rubyzip (1.3.0)
+    shoes (4.0.0.pre1)
+      after_do (~> 0.3)
+      furoshiki (>= 0.1.2)
+      nokogiri
+      swt (~> 0.18)
+    swt (0.18)
+    warbler (2.0.5)
+      jruby-jars (>= 9.0.0.0)
+      jruby-rack (>= 1.1.1, < 1.3)
+      rake (>= 10.1.0)
+      rubyzip (~> 1.0, < 1.4)
+
+PLATFORMS
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin
+  x86_64-darwin
+  x86_64-linux-gnu
+  x86_64-linux-musl
+
+DEPENDENCIES
+  shoes (~> 4.0.0.pre)
+
+BUNDLED WITH
+   2.7.2

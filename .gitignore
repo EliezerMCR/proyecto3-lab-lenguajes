@@ -1,0 +1,11 @@
+# Ruby
+*.gem
+*.rbc
+
+# Bundler
+/.bundle/
+/vendor/bundle
+
+# IDE
+.vscode/
+
