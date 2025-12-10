@@ -17,10 +17,9 @@
 No se debe uar WSL2 porque no tiene servidor gráfico nativo. Para que Shoes abra ventanas, necesitas un X server en Windows.
  
 ## Descripción
-
 Implementación del juego extendido "Piedra, Papel, Tijera, Lagarto, Spock" en Ruby, con interfaz gráfica usando la gema Shoes.
 
-### Reglas del Juego
+## Reglas del Juego
 
 - Tijera corta a Papel
 - Papel tapa a Piedra
@@ -51,6 +50,12 @@ proyecto3-lab-lenguajes/
 
 ---
 
+#### Ubuntu/Debian:
+# HAY QUE HACER BIEN ESTO DE INSTALAR
+---
+
+#### Windows:
+
 ## Dependencias
 
 - **JRuby 9.3.10.0** → Compatible con Shoes 4 rc1.
@@ -59,42 +64,45 @@ proyecto3-lab-lenguajes/
 
 ---
 
-## Instalación
+### Instalación
 
-### Intalar JAVA
-# java version "21.0.8" 2025-07-15 LTS o superior
+# Intalar JAVA
+- java version "21.0.8" 2025-07-15 LTS o superior
 - Instala el path
 
-### 1. Instalar JRuby
+# Instalar JRuby
+- https://www.jruby.org/files/downloads/9.3.10.0/index.html
 
-#### Ubuntu/Debian:
-# HAY QUE HACER BIEN ESTO DE INSTALAR
+# instalar shoes 4
+```bash
+jruby -S gem install shoes --pre --source https://github.com/shoes/shoes4
+```
 
-#### Windows:
-Descargar e instalar desde [RubyInstaller](https://rubyinstaller.org/)
-https://www.jruby.org/files/downloads/9.3.10.0/index.html
+ **Eso instala la versión experimental de Shoes 4 que trae el toolkit gráfico**
 
-## instalar shoes 4
-# jruby -S gem install shoes --pre --source https://github.com/shoes/shoes4
-- Eso instala la versión experimental de Shoes 4 que trae el toolkit gráfico
+# Verifica que Shoes esté disponible
 
-## Verifica que Shoes esté disponible
-# jruby -S gem list shoes
-- Debe mostrar solo shoes (4.0.0.rc1).
+```bash
+ jruby -S gem list shoes
+```
 
-# Verificar que GEmfile tenga
-gem "shoes-core", "4.0.0.rc1"
-gem "shoes-swt", "4.0.0.rc1"
-gem "shoes-package", "4.0.0.rc1"
-gem "shoes-highlighter", "1.0.1"
-gem "shoes-manual", "4.0.1"
-gem "matrix"
+ *Debe mostrar solo shoes (4.0.0.rc1)*
+
+# Verificar que Gemfile tenga:
+- gem "shoes-core", "4.0.0.rc1"
+- gem "shoes-swt", "4.0.0.rc1"
+- gem "shoes-package", "4.0.0.rc1"
+- gem "shoes-highlighter", "1.0.1"
+- gem "shoes-manual", "4.0.1"
+- gem "matrix"
 
 
 # Actualiza Bundle
+```bash
 jruby -S bundle update
+```
 
-### 2. Instalar dependencias con Bundler
+# Instalar dependencias con Bundler
 
 ```bash
 jruby -S bundle install
