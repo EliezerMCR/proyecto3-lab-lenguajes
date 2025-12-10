@@ -7,13 +7,15 @@
 
 ## Integrantes
 
-| Nombre        | Carnet          |
+| Nombre        | Carnet      |
 |---------------|-------------|
 | Eliezer Cario | 18-10605    |
-| Angel Rodriguez    | [Bro pon tu carné y formatea esto de nuevo para que se vea como tabla]  |
+| Angel Rodriguez | 15-11669  |
 
 ---
-
+**IMPORTANTE**
+No se debe uar WSL2 porque no tiene servidor gráfico nativo. Para que Shoes abra ventanas, necesitas un X server en Windows.
+ 
 ## Descripción
 
 Implementación del juego extendido "Piedra, Papel, Tijera, Lagarto, Spock" en Ruby, con interfaz gráfica usando la gema Shoes.
@@ -51,26 +53,51 @@ proyecto3-lab-lenguajes/
 
 ## Dependencias
 
-- **Ruby** (versión 2.5 o superior)
+- **JRuby 9.3.10.0** → Compatible con Shoes 4 rc1.
 - **Bundler** (para manejo de gemas)
-- **Shoes 4** (interfaz gráfica)
+- **Shoes 4 rc1** (interfaz gráfica) Nota: Shoes 4.0.0.pre1 es bastante viejo
 
 ---
 
 ## Instalación
 
-### 1. Instalar Ruby
+### Intalar JAVA
+# java version "21.0.8" 2025-07-15 LTS o superior
+- Instala el path
+
+### 1. Instalar JRuby
 
 #### Ubuntu/Debian:
 # HAY QUE HACER BIEN ESTO DE INSTALAR
 
 #### Windows:
 Descargar e instalar desde [RubyInstaller](https://rubyinstaller.org/)
+https://www.jruby.org/files/downloads/9.3.10.0/index.html
+
+## instalar shoes 4
+# jruby -S gem install shoes --pre --source https://github.com/shoes/shoes4
+- Eso instala la versión experimental de Shoes 4 que trae el toolkit gráfico
+
+## Verifica que Shoes esté disponible
+# jruby -S gem list shoes
+- Debe mostrar solo shoes (4.0.0.rc1).
+
+# Verificar que GEmfile tenga
+gem "shoes-core", "4.0.0.rc1"
+gem "shoes-swt", "4.0.0.rc1"
+gem "shoes-package", "4.0.0.rc1"
+gem "shoes-highlighter", "1.0.1"
+gem "shoes-manual", "4.0.1"
+gem "matrix"
+
+
+# Actualiza Bundle
+jruby -S bundle update
 
 ### 2. Instalar dependencias con Bundler
 
 ```bash
-bundle install
+jruby -S bundle install
 ```
 
 ---
