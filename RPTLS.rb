@@ -1,18 +1,12 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
-
-# =============================================================================
 # Proyecto 3: Piedra, Papel, Tijera, Lagarto, Spock
 # CI-3661 - Laboratorio de Lenguajes de Programación I
 # Universidad Simón Bolívar
-# =============================================================================
 
 require 'shoes'
 
-# =============================================================================
 # JERARQUÍA DE JUGADAS
-# =============================================================================
-
 class Jugada
   VICTORIAS = {
     :Tijera => { :Papel => "corta", :Lagarto => "decapita" },
@@ -80,10 +74,8 @@ class Tijera < Jugada; end
 class Lagarto < Jugada; end
 class Spock < Jugada; end
 
-# =============================================================================
-# JERARQUÍA DE ESTRATEGIAS
-# =============================================================================
 
+# JERARQUÍA DE ESTRATEGIAS
 class Estrategia
   @@semillaPadre = 42
   @@rng = Random.new(@@semillaPadre)
@@ -207,10 +199,8 @@ class Pensar < Estrategia
   end
 end
 
-# =============================================================================
-# CLASE PARTIDA
-# =============================================================================
 
+# CLASE PARTIDA
 class Partida
   attr_reader :jugador1, :jugador2, :estrategia1, :estrategia2
   attr_reader :puntos1, :puntos2, :ronda_actual
@@ -300,10 +290,8 @@ class Partida
   end
 end
 
-# =============================================================================
-# INTERFAZ GRÁFICA CON SHOES
-# =============================================================================
 
+# INTERFAZ GRÁFICA CON SHOES
 Shoes.app(title: "Piedra, Papel, Tijera, Lagarto, Spock", width: 900, height: 700) do
   background white
 
@@ -352,6 +340,7 @@ Shoes.app(title: "Piedra, Papel, Tijera, Lagarto, Spock", width: 900, height: 70
       title "Piedra, Papel, Tijera, Lagarto, Spock", align: "center"
       para "Configura tu partida", align: "center", size: 14
 
+            # Configuración de los jugadores
       flow(margin_top: 20) do
         stack(width: 400, margin: 10) do
           subtitle "Jugador 1"
@@ -380,24 +369,27 @@ Shoes.app(title: "Piedra, Papel, Tijera, Lagarto, Spock", width: 900, height: 70
         end
       end
 
+      # Recrear los radio buttons para el modo de juego
       stack(margin: 20) do
         subtitle "Modo de Juego"
         flow do
           @modo_rondas = radio(:modo)
-          para "Rondas (número fijo de iteraciones)", margin_left: 5
+          para "Rondas (número fijo de iteraciones)", margin_left: 5, align: "automatic"
         end
         flow do
           @modo_alcanzar = radio(:modo)
-          para "Alcanzar (hasta N puntos)", margin_left: 5
+          para "Alcanzar (hasta N puntos)", margin_left: 5, align: "automatic"
         end
-        @modo_rondas.checked = true
+        @modo_rondas.checked = true # Seleccionar "Rondas" por defecto
 
+        # Restablecer el valor de N
         flow(margin_top: 10) do
           para "Valor de N: "
           @n_input = edit_line("5", width: 100)
         end
       end
-
+      
+      # Botón para iniciar partida
       flow(margin_top: 30) do
         button("Iniciar Partida", width: 200, height: 50) do
           iniciar_partida
