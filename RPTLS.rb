@@ -123,8 +123,15 @@ end
 class Uniforme < Estrategia
   def initialize(movimientos)
     @movimientos = movimientos.uniq
+    if @movimientos.empty?
+      raise ArgumentError, "La lista de movimientos no puede estar vacía. Usa al menos uno de: #{Jugada::TODAS.join(', ')}."
   end
-
+   @movimientos.each do |mov|
+      unless Jugada::TODAS.include?(mov)
+        raise ArgumentError, "Movimiento inválido: '#{mov}'. Los movimientos válidos son: #{Jugada::TODAS.join(', ')}."
+      end
+    end
+  end
   def prox(j = nil)
     tipo = @movimientos[random.rand(@movimientos.length)]
     Jugada.crear(tipo)
@@ -335,12 +342,15 @@ Shoes.app(title: "Piedra, Papel, Tijera, Lagarto, Spock", width: 900, height: 70
 
   def mostrar_configuracion
     @main_stack.clear if @main_stack
-
+    @modo = :rondas  # Reiniciar el modo por defecto
+    
     @main_stack = stack(margin: 20) do
-      title "Piedra, Papel, Tijera, Lagarto, Spock", align: "center"
-      para "Configura tu partida", align: "center", size: 14
+       # Título principal
+      background rgb(240, 248, 255)  # Fondo azul claro
+      title "Piedra, Papel, Tijera, Lagarto, Spock", align: "center", stroke: rgb(70, 130, 180)  # Azul steel
+      para "Configura tu partida", align: "center", size: 14, margin_bottom: 20, stroke: rgb(100, 100, 100)
 
-            # Configuración de los jugadores
+      # Configuración de los jugadores
       flow(margin_top: 20) do
         stack(width: 400, margin: 10) do
           subtitle "Jugador 1"
@@ -373,22 +383,23 @@ Shoes.app(title: "Piedra, Papel, Tijera, Lagarto, Spock", width: 900, height: 70
       stack(margin: 20) do
         subtitle "Modo de Juego"
         flow do
-          @modo_rondas = radio(:modo)
+          @modo_rondas = check { @modo = :rondas; @modo_alcanzar.checked = false }
           para "Rondas (número fijo de iteraciones)", margin_left: 5, align: "automatic"
         end
         flow do
-          @modo_alcanzar = radio(:modo)
+          @modo_alcanzar = check { @modo = :alcanzar; @modo_rondas.checked = false }
           para "Alcanzar (hasta N puntos)", margin_left: 5, align: "automatic"
         end
-        @modo_rondas.checked = true # Seleccionar "Rondas" por defecto
+        @modo_rondas.checked = true  # Seleccionar "Rondas" por defecto
+      end
 
         # Restablecer el valor de N
         flow(margin_top: 10) do
           para "Valor de N: "
           @n_input = edit_line("5", width: 100)
         end
-      end
       
+
       # Botón para iniciar partida
       flow(margin_top: 30) do
         button("Iniciar Partida", width: 200, height: 50) do
@@ -402,7 +413,6 @@ Shoes.app(title: "Piedra, Papel, Tijera, Lagarto, Spock", width: 900, height: 70
     e1 = crear_estrategia(@estrategia1_select.text, @params1.text)
     e2 = crear_estrategia(@estrategia2_select.text, @params2.text)
 
-    @modo = @modo_rondas.checked? ? :rondas : :alcanzar
     @n_valor = @n_input.text.to_i
     @n_valor = 5 if @n_valor <= 0
 
@@ -424,7 +434,7 @@ Shoes.app(title: "Piedra, Papel, Tijera, Lagarto, Spock", width: 900, height: 70
       title "Piedra, Papel, Tijera, Lagarto, Spock", align: "center"
 
       @marcador = para "#{@partida.jugador1}: 0 - #{@partida.jugador2}: 0",
-                       align: "center", size: 18, weight: "bold"
+                       align: "center", size: 18, weight: "bold", padding_bottom: 10
 
       @info_modo = para "Modo: #{@modo == :rondas ? 'Rondas' : 'Alcanzar'} - N: #{@n_valor} | Ronda: 0",
                         align: "center", size: 12
